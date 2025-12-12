@@ -7,33 +7,60 @@ export function Gallery10() {
             <div className="container">
                 <div className="mb-12 text-center md:mb-18 lg:mb-20">
                     <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl font-serif text-foreground">Galéria</h2>
+                    <p className="md:text-md text-foreground/80 font-sans">Nézd meg az elkészült munkákat és inspirálódj</p>
                 </div>
-                <div className="gap-8 space-y-8 md:columns-3">
-                    {/* Helyőrző képek, ide majd a sajátjaidat töltjük fel */}
-                    <div className="relative w-full aspect-[4/3] mb-8 break-inside-avoid">
+                <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+                    <div className="break-inside-avoid relative w-full aspect-[4/3]">
                         <Image
                             src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
                             alt="Galéria 1"
                             fill
-                            className="object-cover rounded-sm"
+                            className="object-cover rounded-sm shadow-sm"
                             unoptimized
                         />
                     </div>
-                    <div className="relative w-full aspect-[3/4] mb-8 break-inside-avoid">
+                    <div className="break-inside-avoid relative w-full aspect-[3/4]">
                         <Image
-                            src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+                            src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
                             alt="Galéria 2"
                             fill
-                            className="object-cover rounded-sm"
+                            className="object-cover rounded-sm shadow-sm"
                             unoptimized
                         />
                     </div>
-                    <div className="relative w-full aspect-square mb-8 break-inside-avoid">
+                    <div className="break-inside-avoid relative w-full aspect-square">
                         <Image
                             src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
                             alt="Galéria 3"
                             fill
-                            className="object-cover rounded-sm"
+                            className="object-cover rounded-sm shadow-sm"
+                            unoptimized
+                        />
+                    </div>
+                    <div className="break-inside-avoid relative w-full aspect-[4/3]">
+                        <Image
+                            src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+                            alt="Galéria 4"
+                            fill
+                            className="object-cover rounded-sm shadow-sm"
+                            unoptimized
+                        />
+                    </div>
+                    <div className="break-inside-avoid relative w-full aspect-[3/4]">
+                        <Image
+                            src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
+                            alt="Galéria 5"
+                            fill
+                            className="object-cover rounded-sm shadow-sm"
+                            unoptimized
+                        />
+                    </div>
+                    <div className="break-inside-avoid relative w-full aspect-square">
+                        <Image
+                            src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+                            alt="Galéria 6"
+                            fill
+                            className="object-cover rounded-sm shadow-sm"
                             unoptimized
                         />
                     </div>

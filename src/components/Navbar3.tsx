@@ -2,52 +2,55 @@
 import { Button, useMediaQuery } from "@relume_io/relume-ui";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
-import clsx from "clsx";
+import Link from "next/link";
 
-const useRelume = () => {
+export function Navbar3() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const isMobile = useMediaQuery("(max-width: 991px)");
     const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
-    const getMobileOverlayClassNames = clsx(
-        "fixed inset-0 z-40 bg-black lg:hidden",
-        { block: isMobileMenuOpen, hidden: !isMobileMenuOpen }
-    );
-    const NavbarWrapper = isMobile ? motion.div : "div";
-    const animateMobileMenu = isMobileMenuOpen ? "open" : "close";
-    return { toggleMobileMenu, getMobileOverlayClassNames, animateMobileMenu, NavbarWrapper };
-};
 
-export function Navbar3() {
-    const useActive = useRelume();
     return (
         <section id="navbar" className="grid h-auto w-full grid-cols-[1fr_max-content_1fr] items-center justify-between border-b border-border bg-background px-[5%] md:min-h-18 sticky top-0 z-50">
-            <button className="flex size-12 flex-col justify-center lg:hidden" onClick={useActive.toggleMobileMenu}>
-                <span className="my-[3px] h-0.5 w-6 bg-foreground lg:hidden" />
-                <span className="my-[3px] h-0.5 w-6 bg-foreground lg:hidden" />
-                <span className="my-[3px] h-0.5 w-6 bg-foreground lg:hidden" />
-            </button>
-            <AnimatePresence>
-                <useActive.NavbarWrapper
-                    initial="closed" animate={useActive.animateMobileMenu} exit="closed"
-                    variants={{
-                        closed: { x: "-100%", opacity: 1, transition: { type: "spring", duration: 0.6, bounce: 0 } },
-                        open: { x: 0, opacity: 1, transition: { type: "spring", duration: 0.4, bounce: 0 } },
-                    }}
-                    className="absolute left-0 top-0 z-50 flex h-dvh w-[90%] flex-col border-r border-border bg-background px-[5%] pb-4 md:w-[80%] lg:visible lg:static lg:-ml-4 lg:flex lg:h-auto lg:w-auto lg:flex-row lg:border-none lg:px-0 lg:pb-0"
-                >
-                    <div className="mt-6 lg:hidden"><Button title="Menü" size="sm" className="w-full">Menü</Button></div>
-                    <ul className="flex flex-col lg:flex-row gap-6 mt-10 lg:mt-0 lg:items-center">
-                        <li><a href="#rolam" className="text-foreground font-sans hover:text-primary">Rólam</a></li>
-                        <li><a href="#galeria" className="text-foreground font-sans hover:text-primary">Galéria</a></li>
-                        <li><a href="#kurzusok" className="text-foreground font-sans hover:text-primary">Kézműves kurzusok</a></li>
-                    </ul>
-                </useActive.NavbarWrapper>
-                <motion.div initial={{ opacity: 0 }} exit={{ opacity: 0 }} animate={{ opacity: 0.5 }} transition={{ duration: 0.2 }} className={useActive.getMobileOverlayClassNames} onClick={useActive.toggleMobileMenu} />
-            </AnimatePresence>
-            <a href="#" className="flex min-h-16 flex-shrink-0 items-center font-serif text-2xl font-bold">Papírmánia</a>
-            <div className="flex min-h-16 items-center justify-end gap-x-4">
-                <Button title="Foglalás" size="sm" className="px-4 py-1 md:px-6 md:py-2 bg-primary text-primary-foreground">Foglalás</Button>
+            <div className="flex items-center gap-4 lg:hidden">
+                <button className="flex size-12 flex-col justify-center" onClick={toggleMobileMenu}>
+                    <span className="my-[3px] h-0.5 w-6 bg-foreground" />
+                    <span className="my-[3px] h-0.5 w-6 bg-foreground" />
+                    <span className="my-[3px] h-0.5 w-6 bg-foreground" />
+                </button>
             </div>
+            <Link href="/" className="flex min-h-16 flex-shrink-0 items-center font-serif text-2xl font-bold text-foreground justify-center lg:justify-start">
+                Papírmánia
+            </Link>
+
+            {/* Desktop Menu */}
+            <div className="hidden lg:flex justify-center gap-8">
+                <a href="#rolam" className="text-foreground hover:text-primary transition-colors">Rólam</a>
+                <a href="#galeria" className="text-foreground hover:text-primary transition-colors">Galéria</a>
+                <a href="#kurzusok" className="text-foreground hover:text-primary transition-colors">Kurzusok</a>
+                <a href="#kapcsolat" className="text-foreground hover:text-primary transition-colors">Kapcsolat</a>
+            </div>
+
+            <div className="flex min-h-16 items-center justify-end gap-x-4">
+                <Button title="Foglalás" size="sm" className="bg-primary text-white hover:bg-primary/90">Foglalás</Button>
+            </div>
+
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div
+                        initial={{ x: "-100%" }} animate={{ x: 0 }} exit={{ x: "-100%" }}
+                        transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+                        className="fixed inset-0 z-50 bg-background px-[5%] py-6 lg:hidden flex flex-col h-screen w-[80%] border-r border-border"
+                    >
+                        <div className="flex flex-col gap-6 mt-10 text-lg font-serif text-foreground">
+                            <a href="#rolam" onClick={toggleMobileMenu} className="hover:text-primary">Rólam</a>
+                            <a href="#galeria" onClick={toggleMobileMenu} className="hover:text-primary">Galéria</a>
+                            <a href="#kurzusok" onClick={toggleMobileMenu} className="hover:text-primary">Kurzusok</a>
+                            <a href="#kapcsolat" onClick={toggleMobileMenu} className="hover:text-primary">Kapcsolat</a>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }
